@@ -4,9 +4,11 @@ var lastHit = '-';
 var isGameOver = false;
 var wid = Math.min(...windowDimensions);
 var hei = Math.min(...windowDimensions);
+var CanvasOffsetX = (window.innerWidth-wid)/2
 
 function setup() {
 	createCanvas(wid, hei);
+    canvas.position(canvasX, 0);
     ball = new Ball();
     p1 = new Paddle('u','Red','R','T');
 	p2 = new Paddle('r','Green', 'K','M');
