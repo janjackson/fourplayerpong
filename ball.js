@@ -85,6 +85,7 @@ class Ball {
     
     /* Sets defaults speed and location params for the ball. */
     reset() {
+        gameStarted = false;  // Reset the game state to waiting for space key
         this.x = wid/2;
         this.y = hei/2;
         lastHit = '-';
