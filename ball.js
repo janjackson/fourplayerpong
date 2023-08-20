@@ -1,3 +1,5 @@
+var spinSpeed = 0.2 //the higher the more a moving paddle spins the ball
+
 class Ball {
     /* Represents a new ball. */
     constructor() {
@@ -19,7 +21,7 @@ class Ball {
         
                 if (this.x > p.x) {
                     let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-                    this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+                    this.yspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
         
                     this.xspeed = -this.xspeed;
                     lastHit = 'l';
@@ -38,7 +40,7 @@ class Ball {
         
             if (this.x < p.x) {
                 let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-                this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+                this.yspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
         
                 this.xspeed = -this.xspeed;
                 lastHit = 'r';
@@ -57,7 +59,7 @@ class Ball {
         
                 if (this.y > p.y) {
                     let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the upper paddle
-                    this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+                    this.xspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
         
                     this.yspeed = -this.yspeed;
                     lastHit = 'u';
@@ -76,7 +78,7 @@ class Ball {
         
                 if (this.y < p.y) {
                     let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the bottom paddle
-                    this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+                    this.xspeed += spinSpeed * relativeSpeed; // This 0.5 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
         
                     this.yspeed = -this.yspeed;
                     lastHit = 'd';
