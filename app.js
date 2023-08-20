@@ -9,10 +9,10 @@ var gameStarted = false;
 function setup() {
 	createCanvas(wid, hei);
     ball = new Ball();
-    p1 = new Paddle('u','Red','R','T');
-	p2 = new Paddle('r','Green', 'K','M');
-	p3 = new Paddle('d','Blue','V','B');
-	p4 = new Paddle('l','Yellow','A','Z');
+    p1 = new Paddle('u','Red','N','M');
+	p2 = new Paddle('r','Green', 'L','P');
+	p3 = new Paddle('d','Blue','C','V');
+	p4 = new Paddle('l','Yellow','Q','S');
 }
 
 function draw() {
