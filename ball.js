@@ -12,16 +12,18 @@ class Ball {
     }
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
     checkPaddleLeft(p) {
-        if (this.y - this.r < p.y + p.h/2 &&
-            this.y + this.r > p.y - p.h/2 &&
-            this.x - this.r < p.x + p.w/2) {
-    
-            if (this.x > p.x) {
-                let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-                this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-    
-                this.xspeed = -this.xspeed;
-                lastHit = 'l';
+        if (this.collosionCooldown === 0){
+            if (this.y - this.r < p.y + p.h/2 &&
+                this.y + this.r > p.y - p.h/2 &&
+                this.x - this.r < p.x + p.w/2) {
+        
+                if (this.x > p.x) {
+                    let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
+                    this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+        
+                    this.xspeed = -this.xspeed;
+                    lastHit = 'l';
+                }
             }
         }
     }
@@ -48,16 +50,18 @@ class Ball {
     
     /* Checks if ball hit the upper paddle and returns the ball in the opposite direction. */
     checkPaddleUp(p) {
-        if (this.x - this.r < p.x + p.w/2 &&
-            this.x + this.r > p.x - p.w/2 &&
-            this.y - this.r < p.y + p.h/2) {
-    
-            if (this.y > p.y) {
-                let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the upper paddle
-                this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-    
-                this.yspeed = -this.yspeed;
-                lastHit = 'u';
+        if (this.collosionCooldown === 0){
+            if (this.x - this.r < p.x + p.w/2 &&
+                this.x + this.r > p.x - p.w/2 &&
+                this.y - this.r < p.y + p.h/2) {
+        
+                if (this.y > p.y) {
+                    let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the upper paddle
+                    this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+        
+                    this.yspeed = -this.yspeed;
+                    lastHit = 'u';
+                }
             }
         }
     }
@@ -65,16 +69,18 @@ class Ball {
 
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
     checkPaddleDown(p) {
-        if (this.x - this.r < p.x + p.w/2 &&
-            this.x + this.r > p.x - p.w/2 &&
-            this.y + this.r > p.y - p.h/2) {
-    
-            if (this.y < p.y) {
-                let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the bottom paddle
-                this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-    
-                this.yspeed = -this.yspeed;
-                lastHit = 'd';
+        if (this.collosionCooldown === 0){
+            if (this.x - this.r < p.x + p.w/2 &&
+                this.x + this.r > p.x - p.w/2 &&
+                this.y + this.r > p.y - p.h/2) {
+        
+                if (this.y < p.y) {
+                    let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the bottom paddle
+                    this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+        
+                    this.yspeed = -this.yspeed;
+                    lastHit = 'd';
+                }
             }
         }
     }
