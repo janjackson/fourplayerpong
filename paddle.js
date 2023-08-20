@@ -51,10 +51,10 @@ class Paddle {
     /* Assigns change params for a given paddle. */ 
     move(steps, paddleType) {
     	if (paddleType === 'l' || paddleType === 'r') {
-        	this.ychange = steps;
+        	this.ychange = 1.1*steps;
     	}
     	else{
-    		this.xchange = steps;
+    		this.xchange = 1.1*steps;
     	}
     }
     

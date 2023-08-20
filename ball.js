@@ -6,10 +6,13 @@ class Ball {
         this.x = wid/2;
         this.y = hei/2;
         this.xspeed = 0;
+        this.speedMAX = 20;
+        this.speedMIN = 9;
         this.yspeed = 0;
+        this.speedtotal = 0;
         this.r = wid/50;
         this.collosionCooldown = 0;
-        this.collosionCooldownMax =7;
+        this.collosionCooldownMax =10;
         this.reset();
     }
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
@@ -25,6 +28,17 @@ class Ball {
         
                     this.xspeed = -this.xspeed;
                     lastHit = 'l';
+                    this.collosionCooldown = this.collosionCooldownMax;
+                    //Minimum and Maximum Speed Check
+                    this.speedtotal = Math.sqrt(Math.pow(this.xspeed,2) + Math.pow(this.yspeed,2))
+                    if (this.speedtotal > this.speedMAX) {
+                        this.xspeed = this.xspeed*((this.speedMAX)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMAX)/(this.speedtotal))
+                    }
+                    if (this.speedtotal < this.speedMIN) {
+                        this.xspeed = this.xspeed*((this.speedMIN)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMIN)/(this.speedtotal))
+                    }
                 }
             }
         }
@@ -45,6 +59,16 @@ class Ball {
                 this.xspeed = -this.xspeed;
                 lastHit = 'r';
                 this.collosionCooldown = this.collosionCooldownMax;
+                //Minimum and Maximum Speed Check
+                this.speedtotal = Math.sqrt(Math.pow(this.xspeed,2) + Math.pow(this.yspeed,2))
+                if (this.speedtotal > this.speedMAX) {
+                    this.xspeed = this.xspeed*((this.speedMAX)/(this.speedtotal))
+                    this.yspeed = this.yspeed*((this.speedMAX)/(this.speedtotal))
+                }
+                if (this.speedtotal < this.speedMIN) {
+                    this.xspeed = this.xspeed*((this.speedMIN)/(this.speedtotal))
+                    this.yspeed = this.yspeed*((this.speedMIN)/(this.speedtotal))
+                }
             }
         }
     }    
@@ -63,6 +87,17 @@ class Ball {
         
                     this.yspeed = -this.yspeed;
                     lastHit = 'u';
+                    this.collosionCooldown = this.collosionCooldownMax;
+                    //Minimum and Maximum Speed Check
+                    this.speedtotal = Math.sqrt(Math.pow(this.xspeed,2) + Math.pow(this.yspeed,2))
+                    if (this.speedtotal > this.speedMAX) {
+                        this.xspeed = this.xspeed*((this.speedMAX)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMAX)/(this.speedtotal))
+                    }
+                    if (this.speedtotal < this.speedMIN) {
+                        this.xspeed = this.xspeed*((this.speedMIN)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMIN)/(this.speedtotal))
+                    }
                 }
             }
         }
@@ -82,6 +117,17 @@ class Ball {
         
                     this.yspeed = -this.yspeed;
                     lastHit = 'd';
+                    this.collosionCooldown = this.collosionCooldownMax;
+                    //Minimum and Maximum Speed Check
+                    this.speedtotal = Math.sqrt(Math.pow(this.xspeed,2) + Math.pow(this.yspeed,2))
+                    if (this.speedtotal > this.speedMAX) {
+                        this.xspeed = this.xspeed*((this.speedMAX)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMAX)/(this.speedtotal))
+                    }
+                    if (this.speedtotal < this.speedMIN) {
+                        this.xspeed = this.xspeed*((this.speedMIN)/(this.speedtotal))
+                        this.yspeed = this.yspeed*((this.speedMIN)/(this.speedtotal))
+                    }
                 }
             }
         }
@@ -123,8 +169,6 @@ class Ball {
                 this.yspeed *= -1;
             }
         }
-
-        
     }
     
     /* Determine edges of the screen and updates score. */
