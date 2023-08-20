@@ -5,12 +5,13 @@ var isGameOver = false;
 var wid = Math.min(...windowDimensions);
 var hei = Math.min(...windowDimensions);
 var gameStarted = false;
+var keysPressed = {};
 
 function setup() {
 	createCanvas(wid, hei);
     ball = new Ball();
     p1 = new Paddle('u','Red','N','M');
-	p2 = new Paddle('r','Green', 'L','P');
+	p2 = new Paddle('r','Green', 'P','L');
 	p3 = new Paddle('d','Blue','C','V');
 	p4 = new Paddle('l','Yellow','Q','S');
 }
@@ -66,9 +67,13 @@ function keyReleased() {
     p2.move(0,'r');
    	p1.move(0,'u');
    	p3.move(0,'d');
+    keysPressed[key] = false;
+    updatePaddleMovement();
 }
 
 function keyPressed() {
+    keysPressed[key] = true;
+    updatePaddleMovement();
     if (key === ' ') { // check for space bar press
         gameStarted = true;
         return;  // Exit the function early so other key checks aren't processed during this space key press
@@ -93,6 +98,13 @@ function keyPressed() {
     } else if (key === p3.keyTwo) {
        	p3.move(10,'d');
     }
+}
+
+function updatePaddleMovement() {
+    p1.move(keysPressed[p1.keyOne] ? -10 : (keysPressed[p1.keyTwo] ? 10 : 0), 'u');
+    p4.move(keysPressed[p4.keyOne] ? -10 : (keysPressed[p4.keyTwo] ? 10 : 0), 'l');
+    p2.move(keysPressed[p2.keyOne] ? -10 : (keysPressed[p2.keyTwo] ? 10 : 0), 'r');
+    p3.move(keysPressed[p3.keyOne] ? -10 : (keysPressed[p3.keyTwo] ? 10 : 0), 'd');
 }
 
 /* Returns paddle object based on give player ID */
