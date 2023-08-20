@@ -15,54 +15,67 @@ class Ball {
         if (this.y - this.r < p.y + p.h/2 &&
             this.y + this.r > p.y - p.h/2 &&
             this.x - this.r < p.x + p.w/2) {
-                
+    
             if (this.x > p.x) {
+                let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
+                this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+    
                 this.xspeed = -this.xspeed;
                 lastHit = 'l';
-            }
-            
-        }
-    }
-
-    /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
-    checkPaddleRight(p) {
-        if (this.y - this.r < p.y + p.h/2 &&
-            this.y + this.r > p.y - p.h/2 &&
-            this.x + this.r > p.x - p.w/2) {
-                
-            if (this.x < p.x) {
-                this.xspeed = -this.xspeed;
-                lastHit = 'r';
             }
         }
     }
     
-    /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
+
+    /* Checks if ball hit the right paddle and returns the ball in the opposite direction. */
+    checkPaddleRight(p) {
+        if (this.y - this.r < p.y + p.h/2 &&
+        this.y + this.r > p.y - p.h/2 &&
+        this.x + this.r > p.x - p.w/2) {
+    
+        if (this.x < p.x) {
+            let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
+            this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+    
+            this.xspeed = -this.xspeed;
+            lastHit = 'r';
+        }
+    }    
+    }
+    
+    /* Checks if ball hit the upper paddle and returns the ball in the opposite direction. */
     checkPaddleUp(p) {
         if (this.x - this.r < p.x + p.w/2 &&
             this.x + this.r > p.x - p.w/2 &&
             this.y - this.r < p.y + p.h/2) {
-                
+    
             if (this.y > p.y) {
-                this.yspeed = - this.yspeed;
+                let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the upper paddle
+                this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+    
+                this.yspeed = -this.yspeed;
                 lastHit = 'u';
             }
-            
         }
     }
+    
 
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
-	checkPaddleDown(p) {
+    checkPaddleDown(p) {
         if (this.x - this.r < p.x + p.w/2 &&
             this.x + this.r > p.x - p.w/2 &&
             this.y + this.r > p.y - p.h/2) {
-               
+    
             if (this.y < p.y) {
-                this.yspeed = - this.yspeed;
+                let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the bottom paddle
+                this.xspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+    
+                this.yspeed = -this.yspeed;
                 lastHit = 'd';
-            } 
+            }
         }
     }
+    
 
     /* Generates new coordinates of the ball based on current ball speed. */
     update() {
