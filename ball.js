@@ -6,10 +6,10 @@ class Ball {
         this.xspeed = 0;
         this.yspeed = 0;
         this.r = wid/50;
-        
+        this.collosionCooldown = 0;
+        this.collosionCooldownMax =7;
         this.reset();
     }
-    
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
     checkPaddleLeft(p) {
         if (this.y - this.r < p.y + p.h/2 &&
@@ -29,16 +29,19 @@ class Ball {
 
     /* Checks if ball hit the right paddle and returns the ball in the opposite direction. */
     checkPaddleRight(p) {
-        if (this.y - this.r < p.y + p.h/2 &&
-        this.y + this.r > p.y - p.h/2 &&
-        this.x + this.r > p.x - p.w/2) {
-    
-        if (this.x < p.x) {
-            let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-            this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-    
-            this.xspeed = -this.xspeed;
-            lastHit = 'r';
+        if (this.collosionCooldown === 0){
+            if (this.y - this.r < p.y + p.h/2 &&
+            this.y + this.r > p.y - p.h/2 &&
+            this.x + this.r > p.x - p.w/2) {
+        
+            if (this.x < p.x) {
+                let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
+                this.yspeed += 0.1 * relativeSpeed; // This 0.1 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
+        
+                this.xspeed = -this.xspeed;
+                lastHit = 'r';
+                this.collosionCooldown = this.collosionCooldownMax;
+            }
         }
     }    
     }
@@ -79,6 +82,9 @@ class Ball {
 
     /* Generates new coordinates of the ball based on current ball speed. */
     update() {
+        if (this.collosionCooldown > 0) {
+            this.collosionCooldown--;
+        }
         this.x += this.xspeed;
         this.y += this.yspeed;
     }
