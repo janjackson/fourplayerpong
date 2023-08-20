@@ -103,7 +103,7 @@ class Ball {
         this.x = wid/2;
         this.y = hei/2;
         lastHit = '-';
-        let testing = true; // true for static angle; false for random ball starting angle
+        let testing = false; // true for static angle; false for random ball starting angle
         if(testing==true){
             let angle = 0;
             this.xspeed = 5 * Math.cos(angle*angle);
