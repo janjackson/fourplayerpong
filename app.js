@@ -4,6 +4,7 @@ var lastHit = '-';
 var isGameOver = false;
 var wid = Math.min(...windowDimensions);
 var hei = Math.min(...windowDimensions);
+var gameStarted = false;
 
 function setup() {
 	createCanvas(wid, hei);
@@ -15,35 +16,12 @@ function setup() {
 }
 
 function draw() {
-
     background(0);
-
-    if(Math.max(...Score)>=10){
-    	fill(255);
-    	textSize(wid/20);
-    	let winningPlayer = (Score.indexOf(max(...Score))+1).toString();
-    	isGameOver = true;
-    	text("Paddle " + getPaddle(winningPlayer).color + " wins!",wid/3,wid/2);
-    }
-    
-    ball.checkPaddleRight(p2);
-    ball.checkPaddleLeft(p4);
-    ball.checkPaddleUp(p1);
-    ball.checkPaddleDown(p3);
 
     p4.show();
     p2.show();
    	p1.show();
    	p3.show();
-
-    p4.update('l');
-    p2.update('r');
-   	p1.update('u');
-   	p3.update('d');
-    
-	ball.update();
-	ball.edges();
-	ball.show();
 
     fill(255);
     textSize(wid/50);
@@ -51,6 +29,36 @@ function draw() {
     text(Score[1], p2.x, p2.y);
     text(Score[2],	p3.x,	p3.y);
     text(Score[3], p4.x, p4.y);   
+
+    p4.update('l');
+    p2.update('r');
+   	p1.update('u');
+   	p3.update('d');
+    
+    if(Math.max(...Score)>=10){
+        gameStarted = true;
+    	fill(255);
+    	textSize(wid/20);
+    	let winningPlayer = (Score.indexOf(max(...Score))+1).toString();
+    	isGameOver = true;
+    	text("Paddle " + getPaddle(winningPlayer).color + " wins!",wid/3,wid/2);
+    }
+
+    if (!gameStarted) {
+        fill(255);
+        textSize(wid/20);
+        text("Press SPACE to Start", wid/4, hei/2);
+        return;  // Exit the draw function early
+    }
+    
+    ball.checkPaddleRight(p2);
+    ball.checkPaddleLeft(p4);
+    ball.checkPaddleUp(p1);
+    ball.checkPaddleDown(p3);
+
+	ball.update();
+	ball.edges();
+	ball.show();
 }
 
 function keyReleased() {
@@ -61,6 +69,10 @@ function keyReleased() {
 }
 
 function keyPressed() {
+    if (key === ' ') { // check for space bar press
+        gameStarted = true;
+        return;  // Exit the function early so other key checks aren't processed during this space key press
+    }
     if (key === p1.keyOne) {
        	p1.move(-10, 'u');
     } else if (key === p1.keyTwo) {
