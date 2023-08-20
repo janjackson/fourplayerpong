@@ -88,19 +88,28 @@ class Ball {
         this.x = wid/2;
         this.y = hei/2;
         lastHit = '-';
-        let angle = random(-PI, PI);
-        if ([0].includes(angle)){
-        	this.reset();
+        let testing = true; // true for static angle; false for random ball starting angle
+        if(testing==true){
+            let angle = 0;
+            this.xspeed = 5 * Math.cos(angle*angle);
+            this.yspeed = 5 * Math.sin(angle*angle);
+        }else{
+            let angle = random(-PI, PI);
+             if ([0].includes(angle)){
+                this.reset();
+            }
+            this.xspeed = 5 * Math.cos(angle*angle);
+            this.yspeed = 5 * Math.sin(angle*angle);
+            
+            if (random(1) < 0.5) {
+                this.xspeed *= -1;
+            }
+            if (random(1) < 0.5) {
+                this.yspeed *= -1;
+            }
         }
-        this.xspeed = 5 * Math.cos(angle*angle);
-        this.yspeed = 5 * Math.sin(angle*angle);
+
         
-        if (random(1) < 0.5) {
-            this.xspeed *= -1;
-        }
-        if (random(1) < 0.5) {
-            this.yspeed *= -1;
-        }
     }
     
     /* Determine edges of the screen and updates score. */
