@@ -62,7 +62,7 @@ class Paddle {
     show() {
         fill(this.color);
         rectMode(CENTER);
-        const cornerRadius = 0; // Adjust the corner radius as desired
+        const cornerRadius = 5; // Adjust the corner radius as desired
         rect(this.x, this.y, this.w, this.h, cornerRadius);
         fill(255);
         textSize(wid/50);
