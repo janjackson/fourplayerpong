@@ -8,9 +8,10 @@ class Ball {
         this.speedMIN = 9;
         this.yspeed = 0;
         this.speedtotal = 0;
+        this.spinboost = 0.15;
         this.r = wid/50;
         this.collosionCooldown = 0;
-        this.collosionCooldownMax =10;
+        this.collosionCooldownMax = 8;
         this.reset();
     }
     
@@ -23,6 +24,7 @@ class Ball {
         
                 if (this.x > p.x) {
                     this.xspeed = -this.xspeed;
+                    this.yspeed = this.yspeed - p.ychange*this.spinboost;
                     lastHit = 'l';
                     this.collosionCooldown = this.collosionCooldownMax;
                     //Minimum and Maximum Speed Check
@@ -46,10 +48,11 @@ class Ball {
         if (this.collosionCooldown === 0){
             if (this.y - this.r < p.y + p.h/2 &&
             this.y + this.r > p.y - p.h/2 &&
-            this.x + this.r < p.x - p.w/2) {
+            this.x + this.r > p.x - p.w/2) {
                 
-            if (this.x > p.x) {
+            if (this.x < p.x) {
                 this.xspeed = -this.xspeed;
+                this.yspeed = this.yspeed - p.ychange*this.spinboost;
                 lastHit = 'r';
                 this.collosionCooldown = this.collosionCooldownMax;
                 //Minimum and Maximum Speed Check
@@ -76,6 +79,7 @@ class Ball {
         
                 if (this.y > p.y) {
                     this.yspeed = -this.yspeed;
+                    this.xspeed = this.xspeed - p.xchange*this.spinboost;
                     lastHit = 'u';
                     this.collosionCooldown = this.collosionCooldownMax;
                     //Minimum and Maximum Speed Check
@@ -104,6 +108,7 @@ class Ball {
         
                 if (this.y < p.y) {
                     this.yspeed = -this.yspeed;
+                    this.xspeed = this.xspeed - p.xchange*this.spinboost;
                     lastHit = 'd';
                     this.collosionCooldown = this.collosionCooldownMax;
                     //Minimum and Maximum Speed Check
@@ -134,6 +139,7 @@ class Ball {
         this.x = wid/2;
         this.y = hei/2;
         lastHit = '-';
+        gameStarted = false
         let angle = random(-PI, PI);
         if ([0].includes(angle)){
         	this.reset();
@@ -147,6 +153,7 @@ class Ball {
         if (random(1) < 0.5) {
             this.yspeed *= -1;
         }
+
     }
     
     /* Determine edges of the screen and updates score. */
