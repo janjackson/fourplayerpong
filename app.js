@@ -6,9 +6,12 @@ var wid = Math.min(...windowDimensions);
 var hei = Math.min(...windowDimensions);
 var gameStarted = false;
 var keysPressed = {};
+var GameCanvasOffsetX = (window.innerWidth-wid)/2
 
 function setup() {
-	createCanvas(wid, hei);
+    GameCanvas = createCanvas(wid, hei);
+    GameCanvas.position(GameCanvasOffsetX, 0); //centers the game canvas by offsetting
+
     ball = new Ball();
     p1 = new Paddle('u','Red','N','M');
 	p2 = new Paddle('r','Green', 'P','L');
