@@ -42,7 +42,7 @@ function draw() {
     	textSize(wid/20);
     	let winningPlayer = (Score.indexOf(max(...Score))+1).toString();
     	isGameOver = true;
-    	text("Paddle " + getPaddle(winningPlayer).color + " wins!",wid/3,wid/2);
+    	text(getPaddle(winningPlayer).color + " wins!",wid/3,wid/2);
     }
 
     if (!gameStarted) {
