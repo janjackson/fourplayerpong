@@ -1,5 +1,3 @@
-var spinSpeed = 0.2 //the higher the more a moving paddle spins the ball
-
 class Ball {
     /* Represents a new ball. */
     constructor() {
@@ -15,6 +13,7 @@ class Ball {
         this.collosionCooldownMax =10;
         this.reset();
     }
+    
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
     checkPaddleLeft(p) {
         if (this.collosionCooldown === 0){
@@ -23,9 +22,6 @@ class Ball {
                 this.x - this.r < p.x + p.w/2) {
         
                 if (this.x > p.x) {
-                    let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-                    this.yspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-        
                     this.xspeed = -this.xspeed;
                     lastHit = 'l';
                     this.collosionCooldown = this.collosionCooldownMax;
@@ -50,12 +46,9 @@ class Ball {
         if (this.collosionCooldown === 0){
             if (this.y - this.r < p.y + p.h/2 &&
             this.y + this.r > p.y - p.h/2 &&
-            this.x + this.r > p.x - p.w/2) {
-        
-            if (this.x < p.x) {
-                let relativeSpeed = this.yspeed - p.ychange; // assuming p.ychange is the y-speed of the paddle
-                this.yspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-        
+            this.x + this.r < p.x - p.w/2) {
+                
+            if (this.x > p.x) {
                 this.xspeed = -this.xspeed;
                 lastHit = 'r';
                 this.collosionCooldown = this.collosionCooldownMax;
@@ -82,9 +75,6 @@ class Ball {
                 this.y - this.r < p.y + p.h/2) {
         
                 if (this.y > p.y) {
-                    let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the upper paddle
-                    this.xspeed += spinSpeed * relativeSpeed; // This multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-        
                     this.yspeed = -this.yspeed;
                     lastHit = 'u';
                     this.collosionCooldown = this.collosionCooldownMax;
@@ -99,10 +89,11 @@ class Ball {
                         this.yspeed = this.yspeed*((this.speedMIN)/(this.speedtotal))
                     }
                 }
+                lastHit = 'l';
             }
+            
         }
     }
-    
 
     /* Checks if ball hit the left paddle and returns the ball in the opposite direction. */
     checkPaddleDown(p) {
@@ -112,9 +103,6 @@ class Ball {
                 this.y + this.r > p.y - p.h/2) {
         
                 if (this.y < p.y) {
-                    let relativeSpeed = this.xspeed - p.xchange; // assuming p.xchange is the x-speed of the bottom paddle
-                    this.xspeed += spinSpeed * relativeSpeed; // This 0.5 multiplier controls how much the paddle speed affects the ball's deflection. Adjust as necessary.
-        
                     this.yspeed = -this.yspeed;
                     lastHit = 'd';
                     this.collosionCooldown = this.collosionCooldownMax;
@@ -132,42 +120,32 @@ class Ball {
             }
         }
     }
-    
 
     /* Generates new coordinates of the ball based on current ball speed. */
     update() {
-        if (this.collosionCooldown > 0) {
-            this.collosionCooldown--;
-        }
         this.x += this.xspeed;
         this.y += this.yspeed;
+        if(this.collosionCooldown > 0)
+            this.collosionCooldown --
     }
     
     /* Sets defaults speed and location params for the ball. */
     reset() {
-        gameStarted = false;  // Reset the game state to waiting for space key
         this.x = wid/2;
         this.y = hei/2;
         lastHit = '-';
-        let testing = false; // true for static angle; false for random ball starting angle
-        if(testing==true){
-            let angle = 0;
-            this.xspeed = 5 * Math.cos(angle*angle);
-            this.yspeed = 5 * Math.sin(angle*angle);
-        }else{
-            let angle = random(-PI, PI);
-             if ([0].includes(angle)){
-                this.reset();
-            }
-            this.xspeed = 5 * Math.cos(angle*angle);
-            this.yspeed = 5 * Math.sin(angle*angle);
-            
-            if (random(1) < 0.5) {
-                this.xspeed *= -1;
-            }
-            if (random(1) < 0.5) {
-                this.yspeed *= -1;
-            }
+        let angle = random(-PI, PI);
+        if ([0].includes(angle)){
+        	this.reset();
+        }
+        this.xspeed = 5 * Math.cos(angle*angle);
+        this.yspeed = 5 * Math.sin(angle*angle);
+        
+        if (random(1) < 0.5) {
+            this.xspeed *= -1;
+        }
+        if (random(1) < 0.5) {
+            this.yspeed *= -1;
         }
     }
     

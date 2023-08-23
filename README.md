@@ -1,12 +1,7 @@
 # Four player pong
 
 ## Tasks to change
-- [x] require space to start new game
-- [x] add testing mode with static start
-- [x] let paddle speed influence reflection angle
-- [x] change key bindings
-- [x] fix bug with ball inside paddel
-- [ ] round corners (visually and effectively)
+- [ ] require space to start new game
 - [ ] center game on page
 - [ ] come up with a good name
 
@@ -17,3 +12,13 @@ The ball generates towards a random angle from the center during the start of ea
 - The most recent paddle to hit the ball gets a point.
 - No point changes if ball hasn't been hit by a paddle during current cycle.
 - First player to get **10** points wins.
+
+## Controls (for now)
+_Top_ paddle: **R**, **T**
+
+_Right_ paddle: **K**, **M**
+
+_Bottom_ paddle: **V**, **B**
+
+_Left_ paddle: **A**, **Z**
+

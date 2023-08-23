@@ -16,7 +16,6 @@ class Paddle {
             case 'r':
                 this.w = wid/35;
                 this.h = hei/5;
-                this.r = 10
                 this.y = hei/2;
                 this.x = (wid - 3*this.w);
                 break;
@@ -62,7 +61,7 @@ class Paddle {
     show() {
         fill(this.color);
         rectMode(CENTER);
-        const cornerRadius = 5; // Adjust the corner radius as desired
+        const cornerRadius = 10; // Adjust the corner radius as desired
         rect(this.x, this.y, this.w, this.h, cornerRadius);
         fill(255);
         textSize(wid/50);
