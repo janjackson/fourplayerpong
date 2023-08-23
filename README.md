@@ -14,11 +14,11 @@ The ball generates towards a random angle from the center during the start of ea
 - First player to get **10** points wins.
 
 ## Controls (for now)
-_Top_ paddle: **R**, **T**
+_Top_ paddle: **N**, **M**
 
-_Right_ paddle: **K**, **M**
+_Right_ paddle: **L**, **P**
 
-_Bottom_ paddle: **V**, **B**
+_Bottom_ paddle: **C**, **V**
 
-_Left_ paddle: **A**, **Z**
+_Left_ paddle: **Q**, **S**
 
